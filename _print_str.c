@@ -6,9 +6,9 @@
  *
  * Return: String length.
  */
-int _print_str(char *s)
+int _print_str(va_list list)
 {
-char *p;
+	char *p;
 	int p_len;
 
 	p = va_arg(list, char*);
