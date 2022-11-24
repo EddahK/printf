@@ -2,12 +2,18 @@
 
 /**
   * print_char - print character
-  * @c: char
-  * Return: c
+  * @list: va_list.
+  * Return: 1
   *
   */
 
-int print_char (char c)
+int print_char (va_list list)
 {
-	return (_putchar(c));
+	int aux;
+
+	aux = va_arg(list, int);
+
+	_putchar(aux);
+
+	return (1);
 }
