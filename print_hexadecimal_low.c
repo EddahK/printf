@@ -17,8 +17,3 @@ int print_hexadecimal_low(va_list list)
 
 	return (size);
 }
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-P
