@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 		{
 			if (format[i + 1] == 'c')
 			{
-				_putchar(va_arg(args, int));
+				_print_char(va_arg(args, int));
 				n_displayed++;
 				i++;
 			}
