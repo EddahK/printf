@@ -1,70 +1,48 @@
 #include "main.h"
-#include <limits.h>
 #include <stdio.h>
-
-void print_buffer(char buffer[], int *buff_ind);
-
+#include <stddef.h>
 /**
-  * _printf - function that produces output according to a format
-  * @format: format specification
-  * ...: indefinite arguments
-  *
-  * Return: char outputs
+  * _printf - function that prints std input
+  * @format: format of input - c, %, s
+  * @...: arguments
+  * Return: 0
   */
 int _printf(const char *format, ...)
 {
-	int i, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
+	va_list args;
+	int i = 0, k = 0;
+	char *str = NULL;
+	
 
-	va_list list;
-	char buffer[BUFF_SIZE];
+	va_start(args, format);
 
-	if (format == NULL)
-		return (-1);
-
-	va_start(list, format);
-
-	for (i = 0; format && format[i] != '\0'; i++)
+	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
-		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			 /* write(1, &format[i], 1);*/
-			printed_chars++;
-		}
+			_putchar(format[i]);
 		else
 		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
-			++i;
-			printed = handle_print(format, &i, list, buffer,
-					 flags, width, precision, size);
-			if (printed == -1)
-				return (-1);
-			printed_chars += printed;
+			if (format[i + 1] == 'c')
+			{
+				_putchar(va_arg(args, int));
+				i++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				i++;
+				str = va_arg(args, char *);
+				k = 0;
+				while (str[k] != '\0')
+				{
+					_putchar(str[k]);
+					k++;
+				}
+
+			}	
 		}
+		i++;
 	}
-	print_buffer(buffer, &buff_ind);
 
-	va_end(list);
-
-	return (printed_chars);
-}
-
-/**
-  * print_buffer - Prints the contents of the buffer
-  * @buffer: Array of chars
-  * @buff_ind: Index at which to add next char, represents the length.
-  */
-void print_buffer(char buffer[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind)
-
-			* buff_ind = 0;
+	va_end(args);
+	return (0);
 }
