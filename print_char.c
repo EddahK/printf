@@ -6,7 +6,7 @@
   * Return: 1
   *
   */
-int _print_char(va_list list)
+int print_char(va_list list)
 {
 	int aux;
 
