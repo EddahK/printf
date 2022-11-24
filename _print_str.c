@@ -1,19 +1,18 @@
 #include "main.h"
 
 /**
-  * _printf - function that prints std input
-  * @format: format of input - c, %, s
-  * @...: arguments
-  * Return: 0
-  */
+ * print_string - Print string
+ * @list: list.
+ *
+ * Return: String length.
+ */
 int _print_str(char *s)
 {
-int k = 0;
+char *p;
+	int p_len;
 
-while (str[k] != '\0')
-{
-_putchar(str[k]);
-k++;
-}
- return (0);
+	p = va_arg(list, char*);
+	p_len = print((p != NULL) ? p : "(null)");
+
+	return (p_len);
 }
